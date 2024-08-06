@@ -1,44 +1,89 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-// extension.ts
 import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
 
+/**
+ * This method is called when the extension is activated.
+ * @param context - The context in which the extension is running.
+ */
 export function activate(context: vscode.ExtensionContext) {
-	console.log('PHP Artisan Alias extension is now active!');
+	console.log('PHP Artisan Alias extension activated');
 
-	const setAlias = (terminal: vscode.Terminal) => {
-		const alias = vscode.workspace.getConfiguration('phpArtisanAlias').get<string>('alias') || 'art';
-		console.log(`Setting alias to: ${alias}`);
+	// Retrieve the alias from the configuration, defaulting to 'art'
+	const config = vscode.workspace.getConfiguration('phpArtisanAlias');
+	const alias = config.get<string>('alias') || 'art';
+	console.log(`Alias set to: ${alias}`);
 
-		const shellConfig = vscode.workspace.getConfiguration('terminal.integrated.shell');
-
-		try {
-			if (process.platform === 'win32') {
-				const shellPath = shellConfig.get<string>('windows');
-				console.log(`Shell path: ${shellPath}`);
-				if (shellPath && shellPath.toLowerCase().includes('powershell')) {
-					terminal.sendText(`function ${alias} { php artisan $args }`);
-				} else {
-					terminal.sendText(`doskey ${alias}=php artisan $*`);
+	/**
+	 * Check if the current workspace contains a Laravel project.
+	 * @returns {boolean} - True if a Laravel project is detected, false otherwise.
+	 */
+	const isLaravelProject = (): boolean => {
+		const workspaceFolders = vscode.workspace.workspaceFolders;
+		if (workspaceFolders) {
+			for (const folder of workspaceFolders) {
+				const artisanPath = path.join(folder.uri.fsPath, 'artisan');
+				if (fs.existsSync(artisanPath)) {
+					return true;
 				}
-			} else {
-				terminal.sendText(`alias ${alias}='php artisan'`);
 			}
-		} catch (error) {
-			if (error instanceof Error) {
-				vscode.window.showErrorMessage(`Failed to set alias: ${error.message}`);
-			} else {
-				vscode.window.showErrorMessage(`Failed to set alias due to an unknown error`);
-			}
+		}
+		return false;
+	};
+
+	/**
+	 * Set the alias in the given terminal.
+	 * @param terminal - The terminal in which to set the alias.
+	 */
+	const setAlias = (terminal: vscode.Terminal) => {
+		if (isLaravelProject()) {
+			setTimeout(() => {
+				terminal.processId.then(pid => {
+					if (pid) {
+						const shellPath = vscode.env.shell;
+						console.log(`Detected shell: ${shellPath}`);
+						try {
+							if (process.platform === 'win32') {
+								if (shellPath.includes('powershell') || shellPath.includes('pwsh')) {
+									// Use PowerShell to set the alias
+									terminal.sendText(`function ${alias} { php artisan $args }; cls`);
+									console.log('Alias set for PowerShell');
+								} else {
+									// Handle cmd (not persistent)
+									terminal.sendText(`doskey ${alias}=php artisan $* && cls`);
+									console.log('Alias set for cmd');
+								}
+							} else {
+								// Handle other platforms (Linux, macOS)
+								terminal.sendText(`alias ${alias}='php artisan' && cls`);
+								console.log('Alias set for Unix-like system');
+							}
+						} catch (error: unknown) {
+							if (error instanceof Error) {
+								vscode.window.showErrorMessage(`Error setting alias: ${error.message}`);
+								console.error(error);
+							} else {
+								vscode.window.showErrorMessage('Unknown error setting alias');
+								console.error('Unknown error setting alias', error);
+							}
+						}
+					}
+				});
+			}, 1000); // Delay to ensure terminal is ready
+		} else {
+			vscode.window.showInformationMessage('Not a Laravel project');
+			console.log('Not a Laravel project');
 		}
 	};
 
+	// Listen for terminal creation and set the alias
 	vscode.window.onDidOpenTerminal((terminal) => {
 		setAlias(terminal);
 	});
 
-	let disposable = vscode.commands.registerCommand('extension.setAlias', () => {
-		const terminal = vscode.window.createTerminal(`PHP Artisan Alias`);
+	// Command to manually set the alias
+	const disposable = vscode.commands.registerCommand('phpArtisanAlias.setAlias', () => {
+		const terminal = vscode.window.createTerminal('PHP Artisan Alias');
 		setAlias(terminal);
 		terminal.show();
 	});
@@ -46,4 +91,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(disposable);
 }
 
+/**
+ * This method is called when the extension is deactivated.
+ */
 export function deactivate() { }

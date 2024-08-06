@@ -1,5 +1,3 @@
 # Change Log
 
-All notable changes to the "phpartisanalias" extension will be documented in this file.
-
-- Initial release
+All notable changes to the "php-artisan-alias" extension will be documented in this file.

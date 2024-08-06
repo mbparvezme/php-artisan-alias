@@ -1,26 +1,58 @@
-# PHP Artisan Alias Extension User Guide
+# PHP Artisan Alias
 
-Developed by **[M B Parvez](https://www.mbparvez.me)**, support by **[Gosoft](https://www.gosoft.io)**.
+> Developed by **[M B Parvez](https://www.mbparvez.me)**, support by **[Gosoft](https://www.gosoft.io)**.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Quick Start](#quick-start)
+  - [Default Alias](#default-alias)
+  - [Custom Alias](#custom-alias)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
 
 ## Overview
 
-The PHP Artisan Alias extension for Visual Studio Code simplifies Laravel development by allowing you to set a custom alias for the `php artisan` command in the integrated terminal. This guide walks you through installation, configuration, usage, and testing of the extension to optimize your workflow.
+A VS Code extension to simplify the usage of "php artisan" commands in Laravel projects by allowing you to set a custom alias. By default, the alias is set to "art," but users can modify it using the `phpArtisanAlias.setAlias` setting or the `Set PHP Artisan Alias` command.
+
+## Features
+
+- Set a custom alias for the "php artisan" command.
+- Automatically detect Laravel projects.
+- Supports setting aliases in various terminal environments (cmd, PowerShell, Unix-like systems).
 
 ## Installation
 
-1. **Install the Extension**: Search for "PHP Artisan Alias" in the Visual Studio Code Marketplace and install it.
-2. **Reload Visual Studio Code**: After installation, reload VS Code to activate the extension.
+1. Install the extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mbparvezme.php-artisan-alias).
+2. Reload or restart VS Code to activate the extension.
 
-## Default Alias
+## Usage
 
-By default, the extension sets the alias to `art`. This allows you to use `art` instead of `php artisan` in the terminal immediately after installation.
+### Quick Start
 
-## Configuration
+1. Open a Laravel project in VS Code.
+2. Open a terminal in VS Code.
+3. Use `art` instead of `php artisan`.
 
-To customize the alias:
+### Default Alias
 
-1. **Open Settings**: Navigate to `File` > `Preferences` > `Settings` (or use `Ctrl+,`).
-2. **Set Alias**: Search for `phpArtisanAlias.alias` and set your preferred alias. For example:
+By default, the alias is set to `art`. You can use this alias in any terminal within a Laravel project to run `php artisan` commands. For example:
+
+```sh
+art migrate
+```
+
+## Custom Alias
+
+To set a custom alias:
+
+1. Open your VS Code settings. Navigate to `File` > `Preferences` > `Settings` or use `Ctrl+,` / `cmd+,`.
+2. Search for **HP Artisan Alias**.
+3. Set your desired alias in the `phpArtisanAlias.alias` setting.
 
 ```json
 "phpArtisanAlias.alias": "artisan"
@@ -28,23 +60,18 @@ To customize the alias:
 
 This would set the alias to `artisan`, enabling commands like `artisan migrate` instead of `php artisan migrate`.
 
-## Usage
+Alternatively, you can use the command palette to set the alias:
 
-Once configured:
-
-1. **Open the Command Palette**: Press `Ctrl+Shift+P`.
-2. **Run Command**: Type and select `Set PHP Artisan Alias` to apply your configured alias (`phpArtisanAlias.alias`) to the terminal.
-
-
-## Example Workflow
-
-Here’s a typical workflow using the extension:
-
-1. Install and configure (if required) the extension with your preferred alias.
-2. Open the integrated terminal and execute commands using your alias (`art migrate`).
+1. Open the command palette using `Ctrl+Shift+P` or `Cmd+Shift+P`.
+2. Search for `Set PHP Artisan Alias` and run the command.
+3. Enter your desired alias.
 
 
-## Summary
-The PHP Artisan Alias extension enhances your Laravel development experience in Visual Studio Code by streamlining Artisan commands with a customizable alias. This guide provides step-by-step instructions to help you install, configure, and effectively use the extension.
+## Contributing
 
-For further assistance or to report issues, visit the [GitHub repository](https://github.com/mbparvezme/php-artisan-alias) of the extension contact the publisher at [www.mbparvez.me](https://www.mbparvez.me).
+- Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/mbparvezme/php-artisan-alias/issues).
+- Contact the publisher at [www.mbparvez.me](https://www.mbparvez.me).
+
+## License
+
+[MIT](https://github.com/mbparvezme/php-artisan-alias/blob/master/LICENSE.md)
