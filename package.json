@@ -2,9 +2,10 @@
   "name": "php-artisan-alias",
   "displayName": "php-artisan-alias",
   "description": "Set a custom alias for the 'php artisan' command.",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "publisher": "mbparvezme",
   "publisherUrl": "https://www.mbparvez.me",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.92.0"
   },

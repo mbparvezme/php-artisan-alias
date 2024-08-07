@@ -1,6 +1,6 @@
 # PHP Artisan Alias
 
-> Developed by **[M B Parvez](https://www.mbparvez.me)**, support by **[Gosoft](https://www.gosoft.io)**.
+> Developed by **[M B Parvez](https://www.mbparvez.me)**, support by **[TheUI](https://www.theui.dev)**.
 
 ## Table of Contents
 
