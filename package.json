@@ -2,7 +2,7 @@
   "name": "php-artisan-alias",
   "displayName": "php-artisan-alias",
   "description": "Set custom aliases for 'php artisan' commands and all common Laravel artisan commands for faster development.",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "publisher": "mbparvezme",
   "publisherUrl": "https://www.mbparvez.me",
   "icon": "icon.png",
