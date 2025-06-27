@@ -52,11 +52,27 @@ envd               # php artisan env:decrypt
 enve               # php artisan env:encrypt
 ```
 
+## Commands & Shortcuts
+
+### Help Command
+View all available aliases and their descriptions:
+- **Command Palette**: `Ctrl+Shift+P` → "Show PHP Artisan Aliases Help"
+- **Terminal**: `help` (if you set up the alias)
+
+### Keyboard Shortcuts
+- **Start Laravel Server**: `Ctrl+Alt+S` (anywhere in Laravel project)
+- **Show Help**: `Ctrl+Shift+P` → "Show PHP Artisan Aliases Help"
+
 ## Configuration
 
 **Change main alias** in VS Code settings:
 ```json
 "phpArtisanAlias.alias": "laravel"
+```
+
+**Customize serve shortcut** in VS Code settings:
+```json
+"phpArtisanAlias.serveShortcut": "ctrl+alt+s"
 ```
 
 **Manual setup**: Press `Ctrl+Shift+P` → "Set PHP Artisan Aliases in All Terminals"

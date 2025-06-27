@@ -31,6 +31,21 @@
       {
         "command": "phpArtisanAlias.setAllAliases",
         "title": "Set PHP Artisan Aliases in All Terminals"
+      },
+      {
+        "command": "phpArtisanAlias.help",
+        "title": "Show PHP Artisan Aliases Help"
+      },
+      {
+        "command": "phpArtisanAlias.serve",
+        "title": "Start Laravel Development Server"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "phpArtisanAlias.serve",
+        "key": "ctrl+alt+s",
+        "when": "workspaceFolderCount > 0"
       }
     ],
     "configuration": {
@@ -41,6 +56,11 @@
           "type": "string",
           "default": "art",
           "description": "Main alias for php artisan"
+        },
+        "phpArtisanAlias.serveShortcut": {
+          "type": "string",
+          "default": "ctrl+alt+s",
+          "description": "Keyboard shortcut for starting Laravel development server"
         }
       }
     }
