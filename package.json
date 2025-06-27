@@ -1,8 +1,8 @@
 {
   "name": "php-artisan-alias",
   "displayName": "php-artisan-alias",
-  "description": "Set a custom alias for the 'php artisan' command.",
-  "version": "0.11.0",
+  "description": "Set custom aliases for 'php artisan' commands and all common Laravel artisan commands for faster development.",
+  "version": "0.12.0",
   "publisher": "mbparvezme",
   "publisherUrl": "https://www.mbparvez.me",
   "icon": "icon.png",
@@ -27,6 +27,10 @@
       {
         "command": "phpArtisanAlias.setAlias",
         "title": "Set PHP Artisan Alias"
+      },
+      {
+        "command": "phpArtisanAlias.setAllAliases",
+        "title": "Set PHP Artisan Aliases in All Terminals"
       }
     ],
     "configuration": {
@@ -36,7 +40,7 @@
         "phpArtisanAlias.alias": {
           "type": "string",
           "default": "art",
-          "description": "Alias for php artisan"
+          "description": "Main alias for php artisan"
         }
       }
     }

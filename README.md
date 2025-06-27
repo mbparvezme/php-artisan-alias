@@ -1,77 +1,130 @@
 # PHP Artisan Alias
 
-> Developed by **[M B Parvez](https://www.mbparvez.me)**, support by **[TheUI](https://www.theui.dev)**.
+> VS Code extension for Laravel developers - Set custom aliases for `php artisan` commands.
 
-## Table of Contents
+## Quick Start
 
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Quick Start](#quick-start)
-  - [Default Alias](#default-alias)
-  - [Custom Alias](#custom-alias)
-- [Contributing](#contributing)
-- [License](#license)
-- [Support](#support)
+1. Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mbparvezme.php-artisan-alias)
+2. Open a Laravel project in VS Code
+3. Open a terminal - aliases are set automatically!
 
-## Overview
+## Available Aliases
 
-A VS Code extension to simplify the usage of "php artisan" commands in Laravel projects by allowing you to set a custom alias. By default, the alias is set to "art," but users can modify it using the `phpArtisanAlias.setAlias` setting or the `Set PHP Artisan Alias` command.
+### Main Alias
+```sh
+art serve          # php artisan serve
+art migrate        # php artisan migrate
+```
 
-## Features
+### Make Commands → `mk[command]`
+```sh
+mkmodel User       # php artisan make:model User
+mkcontroller User  # php artisan make:controller User
+mkview welcome     # php artisan make:view welcome
+# ... all make: commands work with mk prefix
+```
 
-- Set a custom alias for the "php artisan" command.
-- Automatically detect Laravel projects.
-- Supports setting aliases in various terminal environments (cmd, PowerShell, Unix-like systems).
+### Direct Commands → Just the command
+```sh
+migrate            # php artisan migrate
+serve              # php artisan serve
+down               # php artisan down
+up                 # php artisan up
+fresh              # php artisan migrate:fresh
+rollback           # php artisan migrate:rollback
+tinker             # php artisan tinker
+test               # php artisan test
+```
 
-## Installation
+### Database Commands → `db[command]`
+```sh
+dbseed             # php artisan db:seed
+dbwipe             # php artisan db:wipe
+dbmonitor          # php artisan db:monitor
+```
 
-1. Install the extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mbparvezme.php-artisan-alias).
-2. Reload or restart VS Code to activate the extension.
+### Quick Commands
+```sh
+routs              # php artisan route:list
+keygen             # php artisan key:generate
+link               # php artisan storage:link
+envd               # php artisan env:decrypt
+enve               # php artisan env:encrypt
+```
 
-## Usage
+## Configuration
 
-### Quick Start
+**Change main alias** in VS Code settings:
+```json
+"phpArtisanAlias.alias": "laravel"
+```
 
-1. Open a Laravel project in VS Code.
-2. Open a terminal in VS Code.
-3. Use `art` instead of `php artisan`.
+**Manual setup**: Press `Ctrl+Shift+P` → "Set PHP Artisan Aliases in All Terminals"
 
-### Default Alias
+## Patterns to Remember
 
-By default, the alias is set to `art`. You can use this alias in any terminal within a Laravel project to run `php artisan` commands. For example:
+### **Make Commands** → `mk[command]`
+**Rule**: Add `mk` prefix to any `make:` command
+```sh
+php artisan make:model User      → mkmodel User
+php artisan make:controller User → mkcontroller User
+php artisan make:view welcome    → mkview welcome
+```
+**💡 Memory**: Think "**M**a**K**e" = `mk`
+
+### **Database Commands** → `db[command]`
+**Rule**: Add `db` prefix to any `db:` command
+```sh
+php artisan db:seed    → dbseed
+php artisan db:wipe    → dbwipe
+php artisan db:monitor → dbmonitor
+```
+**💡 Memory**: Think "**D**ata**B**ase" = `db`
+
+### **Common Commands** → Just the command name
+**Rule**: Remove `php artisan` prefix completely
+```sh
+php artisan migrate → migrate
+php artisan serve   → serve
+php artisan down    → down
+php artisan up      → up
+php artisan tinker  → tinker
+php artisan test    → test
+```
+**💡 Memory**: Most used commands get shortest aliases
+
+### **Migration Commands** → Action name only
+**Rule**: Remove `php artisan migrate:` prefix
+```sh
+php artisan migrate:fresh   → fresh
+php artisan migrate:rollback → rollback
+php artisan migrate:status  → status
+```
+**💡 Memory**: Migration actions are so common, just use the action
+
+### **Quick Shortcuts** → Intuitive abbreviations
+**Rule**: Use logical shortcuts for specific commands
+```sh
+php artisan route:list     → routs (route + s)
+php artisan key:generate   → keygen (key + gen)
+php artisan storage:link   → link (just the action)
+php artisan env:decrypt    → envd (env + d)
+php artisan env:encrypt    → enve (env + e)
+```
+**💡 Memory**: Use the most distinctive part of the command
+
+## Daily Workflow
 
 ```sh
-art migrate
+serve              # Start server
+mkmigration create_users
+migrate            # Run migration
+mkmodel User       # Create model
+dbseed             # Seed database
+tinker             # Test models
+test               # Run tests
 ```
 
-## Custom Alias
+---
 
-To set a custom alias:
-
-1. Open your VS Code settings. Navigate to `File` > `Preferences` > `Settings` or use `Ctrl+,` / `cmd+,`.
-2. Search for **HP Artisan Alias**.
-3. Set your desired alias in the `phpArtisanAlias.alias` setting.
-
-```json
-"phpArtisanAlias.alias": "artisan"
-```
-
-This would set the alias to `artisan`, enabling commands like `artisan migrate` instead of `php artisan migrate`.
-
-Alternatively, you can use the command palette to set the alias:
-
-1. Open the command palette using `Ctrl+Shift+P` or `Cmd+Shift+P`.
-2. Search for `Set PHP Artisan Alias` and run the command.
-3. Enter your desired alias.
-
-
-## Contributing
-
-- Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/mbparvezme/php-artisan-alias/issues).
-- Contact the publisher at [www.mbparvez.me](https://www.mbparvez.me).
-
-## License
-
-[MIT](https://github.com/mbparvezme/php-artisan-alias/blob/master/LICENSE.md)
+**Developer**: [M B Parvez](https://www.mbparvez.me) | **Support**: [TheUI](https://www.theui.dev) | **License**: MIT
